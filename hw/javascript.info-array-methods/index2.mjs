@@ -137,14 +137,24 @@ let users = [
     {id: 'pete', name: "Pete Peterson", age: 31},
 ];
 
-function groupById(users) {
-    let result = {}
-    // map through users to result[id] = user
-    for (let i = 0; i < users.length; i++) {
-        result[users[i]['id']] = users[i];
-    }
-    return result;
-}
+
+// MY ANSWER
+// function groupById(users) {
+//     let result = {}
+//     // map through users to result[id] = user
+//     for (let i = 0; i < users.length; i++) {
+//         result[users[i]['id']] = users[i];
+//     }
+//     return result;
+// }
+
+
+function groupById(array) {
+    return array.reduce((obj, value) => {
+      obj[value.id] = value;
+      return obj;
+    }, {})
+  }
 
 let usersById = groupById(users);
 
