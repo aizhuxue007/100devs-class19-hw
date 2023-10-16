@@ -18,6 +18,28 @@ shuffle(arr);
 // ...
 All element orders should have an equal probability. For instance, [1,2,3] can be reordered as [1,2,3] or [1,3,2] or [3,1,2] etc, with equal probability of each case.
  */
+
+let arr6 = [1, 2, 3];
+
+function shuffle(arr) {
+    arr.sort((a, b) => Math.random() - Math.random());
+}
+
+
+shuffle(arr6);
+// arr = [3, 2, 1]
+console.log(arr6);
+
+shuffle(arr6);
+// arr = [2, 1, 3]
+console.log(arr6);
+
+shuffle(arr6);
+// arr = [3, 1, 2]
+
+// ...
+console.log(arr6);
+
 console.log('-------------------------------------------');
 /**
  * Get average age
@@ -36,6 +58,19 @@ let arr = [ john, pete, mary ];
 
 console.log( getAverageAge(arr) ); // (25 + 30 + 29) / 3 = 28
  */
+let john = { name: "John", age: 25 };
+let pete = { name: "Pete", age: 30 };
+let mary = { name: "Mary", age: 29 };
+
+let arr = [ john, pete, mary ];
+
+function getAverageAge(arr) {
+    let ages = arr.map(person => person.age);
+    return ages.reduce((acc, curr) => acc + curr) / arr.length;
+
+}
+
+console.log( getAverageAge(arr) ); // (25 + 30 + 29) / 3 = 28
 console.log('-------------------------------------------');
 /**
  * Filter unique array members
@@ -54,8 +89,15 @@ let strings = ["Hare", "Krishna", "Hare", "Krishna",
   "Krishna", "Krishna", "Hare", "Hare", ":-O"
 ];
 
-console.log( unique(strings) ); // Hare, Kris
  */
+function unique(arr) {
+    return [...new Set(arr)]
+}
+let strings = ["Hare", "Krishna", "Hare", "Krishna",
+  "Krishna", "Krishna", "Hare", "Hare", ":-O"
+];
+console.log( unique(strings) ); // Hare, Kris
+
 console.log('-------------------------------------------');
 /**
  * Create keyed object from array
@@ -72,7 +114,6 @@ let users = [
   {id: 'pete', name: "Pete Peterson", age: 31},
 ];
 
-let usersById = groupById(users);
 
 /*
 // after the call we should have:
@@ -89,3 +130,28 @@ In this task we assume that id is unique. There may be no two array items with t
 
 Please use array .reduce method in the solution.
  */
+
+let users = [
+    {id: 'john', name: "John Smith", age: 20},
+    {id: 'ann', name: "Ann Smith", age: 24},
+    {id: 'pete', name: "Pete Peterson", age: 31},
+];
+
+function groupById(users) {
+    let result = {}
+    // map through users to result[id] = user
+    for (let i = 0; i < users.length; i++) {
+        result[users[i]['id']] = users[i];
+    }
+    return result;
+}
+
+let usersById = groupById(users);
+
+console.log(usersById)
+/**usersById = {
+    john: {id: 'john', name: "John Smith", age: 20},
+    ann: {id: 'ann', name: "Ann Smith", age: 24},
+    pete: {id: 'pete', name: "Pete Peterson", age: 31},
+  }
+  */
