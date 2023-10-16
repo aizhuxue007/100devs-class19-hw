@@ -149,12 +149,20 @@ let users = [
 // }
 
 
-function groupById(array) {
-    return array.reduce((obj, value) => {
-      obj[value.id] = value;
-      return obj;
+// function groupById(array) {
+//     return array.reduce((obj, value) => {
+//       obj[value.id] = value;
+//       return obj;
+//     }, {})
+//   }
+
+
+function groupById(arr) {
+    return arr.reduce((obj, value) => {
+        obj[value.id] = value;
+        return obj;
     }, {})
-  }
+}
 
 let usersById = groupById(users);
 
