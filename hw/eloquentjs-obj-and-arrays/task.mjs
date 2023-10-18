@@ -91,32 +91,52 @@ console.log(arrayValue);
 
 // // Your code here.
 function arrayToList(arr) {
-    let list = {
-        rest: null
+    let list = null;
+   for (let i = arr.length - 1; i >= 0; i--) {
+    list = {
+        value: arr[i],
+        rest: list
     }
-   
-
+   }
+   console.log(list)
+   return list;
 }
 
 function listToArray(list) {
-
+    let arr = [];
+    for (let node = list; node; node = node.rest) {
+        arr.push(node.value);
+    }
+    return arr;
 }
 
 function prepend(element, list) {
-
+    return { value: element, rest: list };
 }
 
-function nth() {
-
+function nth(list, index) {
+    for (let node = list; index >= 0 && node != null ; node = node.rest) {
+        if (index === 0) {
+            return node.value;
+        }
+        index--;
+    }
 }
 
-console.log(arrayToList([10, 20]));
-// // → {value: 10, rest: {value: 20, rest: null}}
+function recursiveNth(list, index) {
+    if (index === 0) return list.value;
+    return recursiveNth(list.rest, index - 1);
+}
+
+// console.log(arrayToList([10, 20]));
+// → {value: 10, rest: {value: 20, rest: null}}
 // console.log(listToArray(arrayToList([10, 20, 30])));
 // // → [10, 20, 30]
 // console.log(prepend(10, prepend(20, null)));
 // // → {value: 10, rest: {value: 20, rest: null}}
 // console.log(nth(arrayToList([10, 20, 30]), 1));
+console.log(recursiveNth(arrayToList([10, 20, 30]), 1));
+console.log('-----------------')
 // // → 20
 
 
@@ -130,11 +150,30 @@ console.log(arrayToList([10, 20]));
 // The Object.keys function will be useful when you need to go over the properties of objects to compare them.
 
 // // Your code here.
-
-// let obj = {here: {is: "an"}, object: 2};
-// console.log(deepEqual(obj, obj));
-// // → true
-// console.log(deepEqual(obj, {here: 1, object: 2}));
+function deepEqual(obj1, obj2) {
+    let keys = Object.keys;
+    if ((typeof obj1 == 'object' && obj1 != null) && (typeof obj2 == 'object' && obj2 != null)) {
+        if (keys(obj1).length === keys(obj2).length) {
+            for (let key of keys(obj1)) {
+                let item1 = obj1[key], item2 = obj2[key];
+                if (typeof item1 === 'object' && typeof item2 === 'object') {
+                    return deepEqual(item1, item2)
+                } else if (item1 !== item2) {
+                    return false;
+                } else {
+                    continue
+                }
+            }
+        }
+        return true;
+    } else {
+        return obj1 === obj2;
+    }
+}
+let obj = {here: {is: "an"}, object: 2};
+console.log(deepEqual(obj, obj));
+// → true
+console.log(deepEqual(obj, {here: 1, object: 2}));
 // // → false
-// console.log(deepEqual(obj, {here: {is: "an"}, object: 2}));
+console.log(deepEqual(obj, {here: {is: "an"}, object: 2}));
 // // → true
