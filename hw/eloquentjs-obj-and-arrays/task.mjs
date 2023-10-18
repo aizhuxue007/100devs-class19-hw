@@ -94,12 +94,7 @@ function arrayToList(arr) {
     let list = {
         rest: null
     }
-   return arr.reduce((prev, curr) => {
-    return {
-        value: curr,
-        rest: prev ? prev : null
-    }
-   })
+   
 
 }
 
