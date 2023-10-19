@@ -38,28 +38,71 @@
     
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
-
+    let fifteenCenturyInventors = inventors.filter((inventor) => inventor.year >= 1500 && inventor.year < 1600);
+    console.log(fifteenCenturyInventors);
+    console.log('---------------------------');
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    let inventorFullNames = inventors.map(inventor => inventor.first + ' ' + inventor.last)
+    console.log(inventorFullNames);
+    console.log('---------------------------');
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+   
+    let inventorsByDescendingBirthdate = inventors.sort((a, b) => a.year - b.year)
 
+    console.log(inventors)
+    console.log('---------------------------');
+    
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
-
+    let totalYearsLived = inventors.reduce((acc, current) => {
+        console.log(current.passed - current.year)
+        return acc + (current.passed - current.year)
+    }, 0)
+    console.log(totalYearsLived)
+    console.log('---------------------------');
+    
     // 5. Sort the inventors by years lived
-
+    inventors.sort((a, b) => (b.passed - b.year) - (a.passed - a.year) )
+    console.log(inventors)
+    console.log('---------------------------');
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-
+    let deBoulevards = [
+        "Boulevard de l'Amiral-Bruix",
+        "Boulevard des Capucines",
+        "Boulevard de la Chapelle",
+        "Boulevard de Clichy",
+        "Boulevard du Crime",
+        "Boulevard de l'Hôpital",
+        "Boulevard des Italiens",
+        "Boulevard de la Madeleine",
+        "Boulevard de Magenta",
+        "Boulevard Marguerite-de-Rochechouart",
+        "Boulevard de Sébastopol",
+        "Boulevard de Strasbourg",
+        "Boulevard de la Zone"
+    ]
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    people.sort()
+    console.log(people);
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    let dataSet = new Set(data)
+
+
+    let sum = data.reduce((a, b) => {
+        a[b] = a[b] + 1 || 1;
+        return a;
+    }, {})
+    console.log(sum)
+
 
   </script>
 </body>
